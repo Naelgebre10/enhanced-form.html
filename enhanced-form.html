@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced HTML5 Form Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    header, main, footer {
+      margin-bottom: 2rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #333;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    fieldset {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+    legend {
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-top: 0.5rem;
+    }
+    input, select, textarea, button {
+      margin-top: 0.2rem;
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Enhanced HTML5 Page</h1>
+    <p>This page demonstrates lists, tables, media, and an advanced HTML5 form.</p>
+  </header>
+
+  <main>
+    <!-- LISTS -->
+    <section>
+      <h2>My Daily Routine</h2>
+      <ol>
+        <li>Wake up early</li>
+        <li>Exercise</li>
+        <li>Study & Work</li>
+        <li>Relax & Sleep</li>
+      </ol>
+
+      <h2>My Favorite Hobbies</h2>
+      <ul>
+        <li>Reading</li>
+        <li>Coding</li>
+        <li>Traveling</li>
+        <li>Photography</li>
+      </ul>
+    </section>
+
+    <!-- TABLE -->
+    <section>
+      <h2>Weekly Study Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Subject</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monday</td>
+            <td>HTML & CSS</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>JavaScript</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>Databases</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td>React</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>Project Work</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MEDIA -->
+    <section>
+      <h2>Media Showcase</h2>
+      <figure>
+        <img src="https://via.placeholder.com/400x200" alt="Sample Image" width="400">
+        <figcaption>Sample image displayed using semantic HTML5.</figcaption>
+      </figure>
+
+      <h3>Sample Audio</h3>
+      <audio controls>
+        <source src="sample.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <h3>Sample Video</h3>
+      <video width="400" controls>
+        <source src="sample.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <!-- FORM -->
+    <section>
+      <h2>Registration Form</h2>
+      <form action="#" method="post" novalidate>
+        
+        <fieldset>
+          <legend>Personal Information</legend>
+          
+          <label for="fullname">Full Name:</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required minlength="3">
+
+          <label for="email">Email Address:</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="At least 6 characters" required minlength="6">
+
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+        </fieldset>
+
+        <fieldset>
+          <legend>Preferences</legend>
+          
+          <label for="country">Country:</label>
+          <select id="country" name="country" required>
+            <option value="">Select one</option>
+            <option value="ethiopia">Ethiopia</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+          </select>
+
+          <label>Gender:</label>
+          <input type="radio" id="male" name="gender" value="male" required>
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">Female</label>
+
+          <label for="interests">Interests (comma separated):</label>
+          <input type="text" id="interests" name="interests" placeholder="e.g. coding, music" pattern="^[A-Za-z ,]+$">
+        </fieldset>
+
+        <fieldset>
+          <legend>Other Information</legend>
+
+          <label for="bio">Short Bio:</label>
+          <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..." minlength="10"></textarea>
+
+          <label for="website">Website (optional):</label>
+          <input type="url" id="website" name="website" placeholder="https://example.com">
+
+          <label>
+            <input type="checkbox" name="terms" required>
+            I agree to the terms and conditions
+          </label>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Enhanced HTML5 Assignment. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
