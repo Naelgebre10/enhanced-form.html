@@ -25,6 +25,12 @@
       padding: 8px;
       text-align: left;
     }
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
     fieldset {
       margin-bottom: 1.5rem;
       padding: 1rem;
@@ -42,6 +48,16 @@
       width: 100%;
       max-width: 400px;
       padding: 8px;
+    }
+    button:hover {
+      background-color: #ddd;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 0.2rem;
+      display: none;
     }
   </style>
 </head>
@@ -113,23 +129,29 @@
       </table>
     </section>
 
+    <!-- CHART -->
+    <section>
+      <h2>Weekly Study Hours</h2>
+      <canvas id="studyChart"></canvas>
+    </section>
+
     <!-- MEDIA -->
     <section>
       <h2>Media Showcase</h2>
       <figure>
-        <img src="https://via.placeholder.com/400x200" alt="Sample Image" width="400">
-        <figcaption>Sample image displayed using semantic HTML5.</figcaption>
+        <img src="https://via.placeholder.com/400x200?text=Real+Image" alt="A scenic view of a mountain landscape" width="400">
+        <figcaption>A scenic view displayed using semantic HTML5.</figcaption>
       </figure>
 
       <h3>Sample Audio</h3>
       <audio controls>
-        <source src="sample.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
 
       <h3>Sample Video</h3>
       <video width="400" controls>
-        <source src="sample.mp4" type="video/mp4">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </section>
@@ -137,19 +159,22 @@
     <!-- FORM -->
     <section>
       <h2>Registration Form</h2>
-      <form action="#" method="post" novalidate>
+      <form action="#" method="post" id="registration-form">
         
         <fieldset>
           <legend>Personal Information</legend>
           
           <label for="fullname">Full Name:</label>
-          <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required minlength="3">
+          <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required minlength="3" aria-describedby="fullname-error">
+          <span id="fullname-error" class="error" role="alert">Full name must be at least 3 characters.</span>
 
           <label for="email">Email Address:</label>
-          <input type="email" id="email" name="email" placeholder="example@email.com" required>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required aria-describedby="email-error">
+          <span id="email-error" class="error" role="alert">Please enter a valid email address.</span>
 
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" placeholder="At least 6 characters" required minlength="6">
+          <input type="password" id="password" name="password" placeholder="At least 6 characters" required minlength="6" aria-describedby="password-error">
+          <span id="password-error" class="error" role="alert">Password must be at least 6 characters.</span>
 
           <label for="dob">Date of Birth:</label>
           <input type="date" id="dob" name="dob" required>
@@ -173,22 +198,25 @@
           <label for="female">Female</label>
 
           <label for="interests">Interests (comma separated):</label>
-          <input type="text" id="interests" name="interests" placeholder="e.g. coding, music" pattern="^[A-Za-z ,]+$">
+          <input type="text" id="interests" name="interests" placeholder="e.g. coding, music" pattern="^[A-Za-z]+(,\s*[A-Za-z]+)*$" title="Enter interests as comma-separated words (e.g., coding, music)" aria-describedby="interests-error">
+          <span id="interests-error" class="error" role="alert">Enter interests as comma-separated words (e.g., coding, music).</span>
         </fieldset>
 
         <fieldset>
           <legend>Other Information</legend>
 
           <label for="bio">Short Bio:</label>
-          <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..." minlength="10"></textarea>
+          <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..." minlength="10" aria-describedby="bio-error"></textarea>
+          <span id="bio-error" class="error" role="alert">Bio must be at least 10 characters.</span>
 
           <label for="website">Website (optional):</label>
           <input type="url" id="website" name="website" placeholder="https://example.com">
 
           <label>
-            <input type="checkbox" name="terms" required>
+            <input type="checkbox" name="terms" required aria-describedby="terms-error">
             I agree to the terms and conditions
           </label>
+          <span id="terms-error" class="error" role="alert">You must agree to the terms and conditions.</span>
         </fieldset>
 
         <button type="submit">Submit</button>
@@ -201,5 +229,110 @@
     <p>&copy; 2025 Enhanced HTML5 Assignment. All rights reserved.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Chart.js for Weekly Study Hours
+    const ctx = document.getElementById('studyChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        datasets: [{
+          label: 'Study Hours',
+          data: [3, 2, 2, 3, 4],
+          backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#e91e63', '#9c27b0'],
+          borderColor: ['#388e3c', '#1976d2', '#f57c00', '#c2185b', '#7b1fa2'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Hours'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Day'
+            }
+          }
+        }
+      }
+    });
+
+    // Form Validation
+    const form = document.getElementById('registration-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      // Reset error messages
+      document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+
+      // Full Name validation
+      const fullname = document.getElementById('fullname').value;
+      if (fullname.length < 3) {
+        document.getElementById('fullname-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Email validation
+      const email = document.getElementById('email').value;
+      if (!email.includes('@')) {
+        document.getElementById('email-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Password validation
+      const password = document.getElementById('password').value;
+      if (password.length < 6) {
+        document.getElementById('password-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Interests validation
+      const interests = document.getElementById('interests').value;
+      if (interests && !/^[A-Za-z]+(,\s*[A-Za-z]+)*$/.test(interests)) {
+        document.getElementById('interests-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Bio validation
+      const bio = document.getElementById('bio').value;
+      if (bio.length < 10) {
+        document.getElementById('bio-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Terms validation
+      const terms = document.querySelector('input[name="terms"]').checked;
+      if (!terms) {
+        document.getElementById('terms-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) {
+        // For demo purposes, log the form data
+        console.log('Form submitted:', {
+          fullname,
+          email,
+          password,
+          dob: document.getElementById('dob').value,
+          country: document.getElementById('country').value,
+          gender: document.querySelector('input[name="gender"]:checked')?.value,
+          interests,
+          bio,
+          website: document.getElementById('website').value,
+          terms
+        });
+        // Uncomment to submit to a real endpoint
+        // form.submit();
+      }
+    });
+  </script>
 </body>
 </html>
